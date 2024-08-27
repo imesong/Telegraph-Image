@@ -14,7 +14,7 @@ export async function onRequest(context: {
   const cookieKeyValue = await getCookieKeyValue(env.CFP_PASSWORD);
 
   if (
-    // cookie.includes(cookieKeyValue) ||
+    cookie.includes(cookieKeyValue) ||
     CFP_ALLOWED_PATHS.some((path) => pathname.startsWith(path))
     // ||!env.CFP_PASSWORD
   ) {

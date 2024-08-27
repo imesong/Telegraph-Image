@@ -14,9 +14,9 @@ export async function onRequest(context: {
   const cookieKeyValue = await getCookieKeyValue(env.CFP_PASSWORD);
 
   if (
-    cookie.includes(cookieKeyValue) ||
-    CFP_ALLOWED_PATHS.some((path) => pathname.startsWith(path)) ||
-    !env.CFP_PASSWORD
+    // cookie.includes(cookieKeyValue) ||
+    CFP_ALLOWED_PATHS.some((path) => pathname.startsWith(path))
+    // ||!env.CFP_PASSWORD
   ) {
     // Correct hash in cookie, allowed path, or no password set.
     // Continue to next middleware.

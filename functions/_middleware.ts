@@ -15,7 +15,7 @@ export async function onRequest(context: {
 
   if (
     cookie.includes(cookieKeyValue) ||
-    CFP_ALLOWED_PATHS.includes(pathname) ||
+    CFP_ALLOWED_PATHS.some((path) => pathname.startsWith(path)) ||
     !env.CFP_PASSWORD
   ) {
     // Correct hash in cookie, allowed path, or no password set.
@@ -23,10 +23,13 @@ export async function onRequest(context: {
     return await next();
   } else {
     // No cookie or incorrect hash in cookie. Redirect to login.
-    return new Response(getTemplate({ redirectPath: pathname, withError: error === '1' }), {
-      headers: {
-        'content-type': 'text/html'
+    return new Response(
+      getTemplate({ redirectPath: pathname, withError: error === "1" }),
+      {
+        headers: {
+          "content-type": "text/html",
+        },
       }
-    });
+    );
   }
 }
